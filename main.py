@@ -181,7 +181,7 @@ class DeepGSC(nn.Module):
             nn.Softmax(dim=-1)
         )
 
-        # self.print_model_weights()
+        self.print_model_weights()
         print(summary(self, (1, 16000)))
 
     def feature_extraction(self, waveform):
@@ -453,6 +453,7 @@ if __name__ == '__main__':
         nfft=512,
         num_mel=32
     )
+    model.print_model_weights()
 
     trainer = Trainer(
         model=model,
@@ -462,6 +463,8 @@ if __name__ == '__main__':
         num_epochs=50
     )
     trainer.training_loop()
+
+    model.print_model_weights()
 
     # load the best model for testing:
     best_model = deepcopy(model)
